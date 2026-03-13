@@ -345,8 +345,12 @@
       const fee2 = getBlendFee(spend2AUD);
       const avgFee = (fee1 + fee2) / 2;
 
-      const baseCommission = tier === "Tier 1" ? avgFee * 0.5 : avgFee * 0.3;
-      const outboundBonus = isOutboundEl.checked ? 500 : 0;
+      const tier1Commission = avgFee * 0.5;
+const baseCommission = tier === "Tier 1"
+  ? Math.max(1000, tier1Commission)
+  : avgFee * 0.3;
+
+const outboundBonus = isOutboundEl.checked ? 500 : 0;
       const churnBonus = isChurnSaveEl.checked ? 500 : 0;
       const total = baseCommission + outboundBonus + churnBonus;
 
